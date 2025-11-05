@@ -1,3 +1,6 @@
+import {motion} from "framer-motion"
+
+
 const Header = () => {
   return (
     <header className="App-header absolute w-full z-50 transition-all duration-300">
@@ -9,7 +12,7 @@ const Header = () => {
           </div>
           {/* BrandName */}
           <span className="text-xl font-bold bg-linear-to-r from-gray-300 to-gray-100 bg-clip-text text-transparent ">
-            Haseeb 
+            Haseeb
           </span>
         </div>
       </div>
