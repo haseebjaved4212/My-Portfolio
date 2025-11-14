@@ -1,7 +1,14 @@
 import { motion } from "framer-motion";
 import { a } from "framer-motion/client";
-import { FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
+import { useState } from "react";
+import { FiGithub, FiLinkedin, FiTwitter, FiMenu, FiX } from "react-icons/fi";
+
 const Header = () => {
+  // Toggle The Menu Open/Close
+
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => setIsOpen(!isOpen);
+
   return (
     <header className="App-header absolute w-full z-50 transition-all duration-300">
       <div className="container mx-auto px-4 py-6 flex justify-between items-center sm:px-6 lg:px-8 h-16 md:h-20">
@@ -108,7 +115,11 @@ const Header = () => {
         >
           Hire Me
         </motion.button>
+        <div className="md:hidden flex items-center">
+          <button>{isOpen ? <FiX /> : <FiMenu />}</button>
+        </div>
       </div>
+      {/* Mobile Navigation */}
     </header>
   );
 };
