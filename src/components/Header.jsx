@@ -225,7 +225,10 @@ const Header = () => {
                 <label htmlFor="message" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Message</label>
                 <textarea id="message" name="message" rows="4" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600 focus:border-violet-600" placeholder="Enter your message"></textarea>
               </div>
-              <button type="submit" className="w-full px-4 py-2 bg-violet-600 text-white font-medium rounded-lg hover:bg-gray-100  hover:text-violet-700 transition-colors duration-300">Send Message</button>
+              <motion.button 
+              whileHover={{scale: 1.03}}
+              whileTap={{scale: 0.98}}
+              type="submit" className="w-full px-4 py-2 bg-violet-600 text-white font-medium rounded-lg hover:bg-gray-100  hover:text-violet-700 transition-colors duration-300">Send Message</motion.button>
             </form>
           </div>
         </motion.div>
