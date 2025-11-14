@@ -1,5 +1,4 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { a } from "framer-motion/client";
 import { useState } from "react";
 import { FiGithub, FiLinkedin, FiTwitter, FiMenu, FiX } from "react-icons/fi";
 
