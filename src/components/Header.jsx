@@ -99,7 +99,7 @@ const Header = () => {
           </motion.a>
 
 
-          
+
           {/* Hire Me Button*/}
           <motion.button
             initial={{ opacity: 0, scale: 0.8 }}
@@ -120,12 +120,68 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         <div className="md:hidden flex items-center">
-          <motion.button className="text-gray-300 cursor-pointer"
-          onClick={toggleMenu}
-          
-          >{isOpen ? <FiX classname="h-5 w-5" /> : <FiMenu  classname="h-6 w-6"/>}</motion.button>
+          <motion.button
+            whileTap={{ scale: 0.8 }}
+
+
+            className="text-gray-300 cursor-pointer"
+            onClick={toggleMenu}
+
+          >{isOpen ? <FiX classname="h-8 w-8" /> : <FiMenu classname="h-8 w-8" />}</motion.button>
         </div>
       </div>
+      {/* Mobile Menu */}
+      <motion.div
+        initial={{ opacity: 0, height: 0 }}
+        animate={{ opacity: isOpen ? 1 : 0, height: isOpen ? "auto" : 0 }}
+        transition={{
+
+          duration: 0.5,
+        }}
+        className="md:hidden overflow-hidden bg-white dark:bg-gray-900 shadow-lg px-4 py-5 space-y-5">
+        <nav className="flex flex-col space-y-3">
+          {[
+            "Home",
+            "About",
+            "Projects",
+            "Contact",
+          ].map((item, index) => (
+            <motion.a
+              onClick={toggleMenu}
+              key={item}
+
+              className="relative text-gray-800 dark:text-gray-200 hover:text-violet-600 dark:hover:text-violet-400 font-medium transition-colors duration-300 group"
+              href="#"
+            >
+              {item}
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-violet-600 group-hover:w-full transition-all duration-300"></span>
+            </motion.a>
+          ))}
+        </nav>
+        {/* Social Icons -Mobile */}
+        <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div className="flex space-x-5">
+            <a href="#">
+              <FiGithub className="w-5 h-5 text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300" />
+            </a>
+            <a href="#">
+              <FiTwitter className="w-5 h-5 text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300" />
+            </a>
+            <a href="#">
+              <FiLinkedin className="w-5 h-5 text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300" />
+            </a>
+          </div>
+          <button
+            onClick={() => { toggleMenu() }}
+
+            className="w-full mt-5 px-4 py-2 rounded-xl bg-linear-to-r from-gray-400 to-gray-100 text-violet-700 font-bold hover:from-violet-700 hover:to-purple-700 hover:text-white transition-all duration-300 ">
+            Hire Me
+          </button>
+
+
+        </div>
+
+      </motion.div>
     </header>
   );
 };
