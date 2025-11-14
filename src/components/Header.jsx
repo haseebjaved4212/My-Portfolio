@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { a } from "framer-motion/client";
 import { useState } from "react";
 import { FiGithub, FiLinkedin, FiTwitter, FiMenu, FiX } from "react-icons/fi";
@@ -187,53 +187,73 @@ const Header = () => {
             </a>
           </div>
           <button
-            onClick={() => { toggleMenu() }}
+            onClick={() => { toggleMenu()
+              openContactForm()
+
+
+             }}
 
             className="w-full mt-5 px-4 py-2 rounded-xl bg-linear-to-r from-gray-400 to-gray-100 text-violet-700 font-bold hover:from-violet-700 hover:to-purple-700 hover:text-white transition-all duration-300 ">
             Hire Me
           </button>
         </div>
       </motion.div>
+
+
       {/* Contact Form  */}
-      {ContactFormOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-          className="fixed inset-0 bg-black/50 
+      <AnimatePresence >
+
+
+        {ContactFormOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="fixed inset-0 bg-black/50 
         background-blur-sm  flex items-center justify-center z-50 p-4 "
           // onClick={closeContactForm}
-        >
-          <div className="bg-white max-w-md w-full dark:bg-gray-900 p-6 rounded-lg  shadow-xl">
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0, y: 30 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.8, opacity: 0, y: 30 }}
+              transition={{
+                type: "spring",
+                damping: 30,
+                stiffness: 200,
+                duration: 0.8
+
+              }}
+              className="bg-white max-w-md w-full dark:bg-gray-900 p-6 rounded-lg  shadow-xl">
 
 
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold">Get in Touch</h2>
-              <button onClick={closeContactForm} className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300"><FiX className="w-5 h-5" /></button>
-            </div>
-            <form action="">
-              <div className="mb-4">
-                <label htmlFor="name" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Name</label>
-                <input type="text" id="name" name="name" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600 focus:border-violet-600" placeholder="Enter your name" />
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-2xl font-bold">Get in Touch</h2>
+                <button onClick={closeContactForm} className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300"><FiX className="w-5 h-5" /></button>
               </div>
-              <div className="mb-4">
-                <label htmlFor="email" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Email</label>
-                <input type="email" id="email" name="email" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600 focus:border-violet-600" placeholder="Enter your email" />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="message" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Message</label>
-                <textarea id="message" name="message" rows="4" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600 focus:border-violet-600" placeholder="Enter your message"></textarea>
-              </div>
-              <motion.button 
-              whileHover={{scale: 1.03}}
-              whileTap={{scale: 0.98}}
-              type="submit" className="w-full px-4 py-2 bg-violet-600 text-white font-medium rounded-lg hover:bg-gray-100  hover:text-violet-700 transition-colors duration-300">Send Message</motion.button>
-            </form>
-          </div>
-        </motion.div>
-      )}
-
+              <form action="">
+                <div className="mb-4">
+                  <label htmlFor="name" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Name</label>
+                  <input type="text" id="name" name="name" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600 focus:border-violet-600" placeholder="Enter your name" />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="email" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Email</label>
+                  <input type="email" id="email" name="email" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600 focus:border-violet-600" placeholder="Enter your email" />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="message" className="block text-gray-700 dark:text-gray-300 font-medium mb-2">Message</label>
+                  <textarea id="message" name="message" rows="4" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600 focus:border-violet-600" placeholder="Enter your message"></textarea>
+                </div>
+                <motion.button
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                  type="submit" className="w-full px-4 py-2 bg-violet-600 text-white font-medium rounded-lg hover:bg-gray-100  hover:text-violet-700 transition-colors duration-300">Send Message</motion.button>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
 
     </header>
