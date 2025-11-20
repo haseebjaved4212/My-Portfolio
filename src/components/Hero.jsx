@@ -41,7 +41,7 @@ const Hero = () => {
       {/* Right Side*/}
 
       <Spline
-        className='absolute xl:right-[27%]'
+        className='absolute xl:right-[-28%] right-0 top-[-20%] lg:top-0'
 
         scene="https://prod.spline.design/bAOhRRb5EIC-p1js/scene.splinecode" />
 
