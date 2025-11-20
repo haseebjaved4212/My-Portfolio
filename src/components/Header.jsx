@@ -141,7 +141,7 @@ const Header = () => {
             className="text-gray-300 cursor-pointer"
             onClick={toggleMenu}
 
-          >{isOpen ? <FiX classname="h-8 w-8" /> : <FiMenu classname="h-8 w-8" />}</motion.button>
+          >{isOpen ? <FiX classname="h-8 w-8" /> : <FiMenu className="h-8 w-8" />}</motion.button>
         </div>
       </div>
       {/* Mobile Menu */}
