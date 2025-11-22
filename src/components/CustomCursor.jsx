@@ -43,7 +43,7 @@ const CustomCursor = () => {
       ease: "power3.out",
     });
 
-    //  Mouse Move Handler 
+    //  Mouse Move Handler
     const handleMouseMove = (e) => {
       xTo(e.clientX);
       yTo(e.clientY);
@@ -52,8 +52,20 @@ const CustomCursor = () => {
     };
     //  Add Mouse Move listener \
     window.addEventListener("mousemove", handleMouseMove);
-
-
+    //  Add Click Animations
+    document.addEventListener("mousedown", () => {
+      gsap.to([cursor, cursorBorder], {
+        scale: 0.6,
+        duration: 0.2,
+      });
+    });
+    document.addEventListener("mouseup", () => {
+      gsap.to([cursor, cursorBorder], {
+        scale: 1,
+        duration: 0.2,
+      });
+    });
+    
   }, []);
   return (
     <>

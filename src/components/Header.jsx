@@ -132,7 +132,7 @@ const Header = () => {
         <div className="md:hidden flex items-center">
           <motion.button
             whileTap={{ scale: 0.8 }}
-            className="text-gray-300 cursor-pointer"
+            className="text-gray-300 "
             onClick={toggleMenu}
           >
             {isOpen ? (
