@@ -19,18 +19,42 @@ const CustomCursor = () => {
 
     // Initial Position Off-screen
     gsap.set([cursor, cursorBorder], {
-    
       xPercent: 50,
       yPercent: 50,
     });
 
-    //  Variables  For Cursor position With different  Speed 
+    //  Variables  For Cursor position With different  Speed
+
+    const xTo = gsap.quickTo(cursor, "x", {
+      duration: 0.2,
+      ease: "power3.out",
+    });
+    const yTo = gsap.quickTo(cursor, "y", {
+      duration: 0.2,
+      ease: "power3.out",
+    });
+
+    const xToBorder = gsap.quickTo(cursorBorder, "x", {
+      duration: 0.5,
+      ease: "power.out",
+    });
+    const yToBorder = gsap.quickTo(cursorBorder, "y", {
+      duration: 0.5,
+      ease: "power3.out",
+    });
+
+    //  Mouse Move Handler 
+    const handleMouseMove = (e) => {
+      xTo(e.clientX);
+      yTo(e.clientY);
+      xToBorder(e.clientX);
+      yToBorder(e.clientY);
+    };
+    //  Add Mouse Move listener \
+    window.addEventListener("mousemove", handleMouseMove);
 
 
-
-
-
-  });
+  }, []);
   return (
     <>
       {/* Main Cursor Dot  */}
