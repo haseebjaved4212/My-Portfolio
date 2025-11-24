@@ -6,7 +6,7 @@ const About = () => {
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const introRef = useRef(null);
-  const starRef = useRef(null);
+  const starRef = useRef([]); // initialize as array
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -50,23 +50,27 @@ const About = () => {
         },
       }
     );
+
     // Stars Animation
+    if (!starRef.current || starRef.current.length === 0) return;
+
     starRef.current.forEach((star, index) => {
       const direction = index % 2 === 0 ? 1 : -1;
-      const speed = 0.5 + Math.random() * 0.5
+      const speed = 0.5 + Math.random() * 0.5;
       gsap.to(star, {
         x: `${direction * (100 + index * 20)}`,
         y: `${direction * -50 + index * 10}`,
         rotation: direction * 360,
-        ease: "none ",
+        ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top bottom ",
-          end: "bottom top ",
+          start: "top bottom",
+          end: "bottom top",
           scrub: speed,
         },
       });
-    }, );
+    });
+
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => {
         if (trigger.vars.trigger === sectionRef.current) {
@@ -74,26 +78,25 @@ const About = () => {
         }
       });
     };
-  });
+  }, []); // run once on mount
+
   const addToStars = (el) => {
     if (el && !starRef.current.includes(el)) {
       starRef.current.push(el);
     }
   };
-
   return (
     <section
-      ref={sectionRef , }
-
-      className="h-screen relative bg-linear-to-b from-black to-[#9a74cf50]  "
+      ref={sectionRef}
+      className="h-screen relative bg-linear-to-b from-black to-[#9a74cf50]"
     >
       {/* Stars */}
-      <div className="absolute inset-0 overflow-hidden ">
+      <div className="absolute inset-0 overflow-hidden">
         {[...Array(10)].map((_, i) => (
           <div
-            ref={starRef}
+            ref={addToStars}
             key={`star-${i}`}
-            className="absolute rounded-full "
+            className="absolute rounded-full"
             style={{
               width: `${10 + i * 3}px`,
               height: `${10 + i * 3}px`,
