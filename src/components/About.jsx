@@ -6,6 +6,7 @@ const About = () => {
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const introRef = useRef(null);
+  const starRef = useRef(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -49,28 +50,58 @@ const About = () => {
         },
       }
     );
-  }, []);
+    // Stars Animation
+    starRef.current.forEach((star, index) => {
+      const direction = index % 2 === 0 ? 1 : -1;
+      const speed = 0.5 + Math.random() * 0.5
+      gsap.to(star, {
+        x: `${direction * (100 + index * 20)}`,
+        y: `${direction * -50 + index * 10}`,
+        rotation: direction * 360,
+        ease: "none ",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top bottom ",
+          end: "bottom top ",
+          scrub: speed,
+        },
+      });
+    }, );
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.vars.trigger === sectionRef.current) {
+          trigger.kill();
+        }
+      });
+    };
+  });
+  const addToStars = (el) => {
+    if (el && !starRef.current.includes(el)) {
+      starRef.current.push(el);
+    }
+  };
 
   return (
     <section
-      ref={sectionRef}
+      ref={sectionRef , }
+
       className="h-screen relative bg-linear-to-b from-black to-[#9a74cf50]  "
     >
       {/* Stars */}
       <div className="absolute inset-0 overflow-hidden ">
         {[...Array(10)].map((_, i) => (
-          <div key={`star-${i}`} 
-          className="absolute rounded-full "
-          style={{
-            width: `${10 + i * 3}px`,
-            height: `${10 + i * 3}px`,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            opacity : 0.2 + Math.random() * 0.4,
-            backgroundColor: "white" 
-
-
-          }}
+          <div
+            ref={starRef}
+            key={`star-${i}`}
+            className="absolute rounded-full "
+            style={{
+              width: `${10 + i * 3}px`,
+              height: `${10 + i * 3}px`,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              opacity: 0.2 + Math.random() * 0.4,
+              backgroundColor: "white",
+            }}
           />
         ))}
       </div>
@@ -85,7 +116,7 @@ const About = () => {
 
         <div
           ref={introRef}
-          className="mt-8 mx-4 w-full flex flex-col items-center gap-10 md:gap-16 md:flex-row md:items-center md:justify-between opacity-0"
+          className="mt-8 mx-6 w-full p-4 flex flex-col items-center gap-10 md:gap-16 md:flex-row md:items-center md:justify-between opacity-0"
         >
           <h3 className="text-sm md:text-2xl font-bold text-purple-200 max-w-[40rem] text-center md:text-left tracking-wider">
             I'm a front-end developer passionate about creating modern,
