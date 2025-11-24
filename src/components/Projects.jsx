@@ -10,7 +10,7 @@ const Projects = () => {
 
     useEffect(()=>
     {
-
+gsap.registerPlugin(ScrollTrigger)
     })
     
 
