@@ -1,6 +1,7 @@
 import { useRef, useEffect } from "react"
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { CiShare1 } from "react-icons/ci";
 
 const Projects = () => {
   const sectionRef = useRef(null);
@@ -11,7 +12,26 @@ const Projects = () => {
 
   const projectsImages = [
     {
-      id: 1, 
+      id: 1,
+      title: "AI Powered Image Enhancer",
+      imageSrc: "/Images/Image-enhancer.png",
+
+    },
+    {
+      id: 2,
+      title: "Prayer Times App ",
+      imageSrc: "/Images/Prayer-times.png",
+
+    }, {
+      id: 3,
+      title: "CodeFlow AI",
+      imageSrc: "/Images/CodeFlow.png",
+
+    }, {
+      id: 4,
+      title: "Real Estate Agency Web",
+      imageSrc: "/Images/Megma.png",
+
     }
   ]
 
@@ -90,6 +110,19 @@ const Projects = () => {
 
       <div className="overflow-hidden ">
         <div className="horizontal-section flex  md:w-[400%] w-[420%] not-visited:">
+          {projectsImages.map((project) => (
+            <div Loading key={project.id} className="panel relative flex items-center justify-center  ">
+
+              <div className="relative w-full h-full flex flex-col items-center justify-center p-4 sm:p-8 md:p-12 ">
+                <img
+                className="project-image max-w-full max-h-full rounded-2xl object-cover "
+                src={project.imageSrc} alt="Project-Image" />
+                <h2 className="project-title flex items-center  gap-3 md:text-3xl text-sm md:font-bold text-black mt-6 z-50 text-nowrap hover:text-gray-400 transition-colors duration-300  ">{project.title} <CiShare1 /></h2>
+              </div>
+            </div>
+          )
+
+          )}
 
 
         </div>
