@@ -4,11 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  resolve: {
-    alias: {
-      'lodash.debounce': '/src/shims/lodashDebounceDefault.js',
-    },
-  },
+  
   optimizeDeps: {
     exclude: [
       'gsap',

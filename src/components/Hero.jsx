@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-import Spline from '@splinetool/react-spline';
+// import Spline from '@splinetool/react-spline';
 
 
 const Hero = () => {
@@ -39,11 +39,21 @@ const Hero = () => {
         </motion.p>
       </div>
       {/* Right Side*/}
+     
 
-      <Spline
+      {/* <Spline
         className='absolute xl:right-[-28%] right-0 top-[-20%] lg:top-0'
 
-        scene="https://prod.spline.design/bAOhRRb5EIC-p1js/scene.splinecode" />
+        scene="https://prod.spline.design/bAOhRRb5EIC-p1js/scene.splinecode" /> */}
+        
+
+  <iframe
+  
+    src="https://my.spline.design/reactiveorbcopy-yFjlDPF6VW6ij5mFfifbF1iB/"
+    className="w-full h-full border-0"
+    frameBorder="0"
+    allow=" absolute xl:right-[-38%]"
+  />
 
     </section>
   );

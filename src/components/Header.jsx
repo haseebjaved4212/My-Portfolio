@@ -136,7 +136,7 @@ const Header = () => {
             onClick={toggleMenu}
           >
             {isOpen ? (
-              <FiX classname="h-8 w-8" />
+              <FiX className="h-8 w-8" />
             ) : (
               <FiMenu className="h-8 w-8" />
             )}
