@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react"
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CiShare1 } from "react-icons/ci";
-import { TbLadle, TbLamp } from "react-icons/tb";
+
 
 
 const Projects = () => {
@@ -19,26 +19,26 @@ const Projects = () => {
       id: 1,
       title: "AI Powered Image Enhancer",
       imageSrc: "/Images/Image-enhancer.png",
-      link: "https://your-ai-image-enhancer-link.com",
+      link: "https://haseebjaved4212.github.io/AI-Powered-Image-Enhancer/",
 
     },
     {
       id: 2,
       title: "Prayer Times App ",
       imageSrc: "/Images/Prayer-times.png",
-      link: "https://your-prayer-times-app-link.com",
+      link: "https://haseebjaved4212.github.io/Ramadan-Special-Website/",
 
     }, {
       id: 3,
       title: "CodeFlow AI",
       imageSrc: "/Images/CodeFlow.png",
-      link: "https://your-codeflow-ai-link.com",
+      link: "https://code-flow-five.vercel.app/",
 
     }, {
       id: 4,
       title: "Real Estate Agency Web",
       imageSrc: "/Images/Megma.png",
-      link: "https://your-real-estate-web-link.com",
+      link: "https://haseebjaved4212.github.io/Real-Estate-Agency-Website/",
 
     }
   ]
