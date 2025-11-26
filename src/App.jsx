@@ -7,6 +7,9 @@ import Hero from './components/Hero.jsx'
 import CustomCursor from './components/CustomCursor.jsx'
 import About from './components/About.jsx'
 import Projects from './components/Projects.jsx'
+import Contact from './components/Contact.jsx'
+
+
 const App = () => {
   useEffect(() => {
       // Register ScrollTrigger Plugin
@@ -28,6 +31,7 @@ const App = () => {
       <CustomCursor />
       <About />
       <Projects />
+      <Contact />
     </>
   )
 }
