@@ -99,6 +99,7 @@ const Projects = () => {
       }, {
       y: 0,
       rotationX: 0,
+      opacity: 1,
       duration: 1,
       ease: "power2.out",
       delay: 0.2,
@@ -111,9 +112,69 @@ const Projects = () => {
       }
     }
     )
+    //  Parallex Effect for Entire Section
+
+    gsap.fromTo(
+      sectionRef.current,
+      {
+        backgroundPosition: "50% 0%"
+
+      }, {
+      backgroundPosition: "50% 100% ",
+      ease: "none ",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top bottom",
+        end: " bottom top ",
+        scrub: true,
+
+      }
 
 
-  })
+    }
+    )
+    //  Horizontal Scrolling 
+    const horizontalScroll = gsap.to("panel", {
+      xPercent: -100 * (projectsImages.length - 1),
+      ease: "none",
+      scrollTrigger: {
+        trigger: triggerRef.current,
+        start: "top top",
+        end: () => `+=${horizontalRef.current.offsetWidth}`,
+        pin : true ,
+        scrub: 1, 
+        snap:{
+          snapTo: 1 / (projectsImages.length -1 ),
+          duration: {main : 0.2 , max: 0.3 },
+          delay: 0.1
+        } , 
+        invalidateOnRefresh: true,
+
+      }
+
+    })
+    //  Image Animations 
+    const panels =  gsap.utils.toArray (".panel")
+    panels.forEach((panel, i ) => {
+      const image = panel.querySelector(".project-image")
+      const imageTitle = panel.querySelector(".project-title")
+
+      //  Create a TimeLine For Each Panel 
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: panel , 
+          containerAnimation: horizontalScroll, 
+          start: "left right",
+          end : "right left ",
+          scrub : true ,
+          
+        }
+      })
+
+    })
+
+  }, [])
 
 
 
@@ -137,7 +198,7 @@ const Projects = () => {
       <div ref={triggerRef} className="overflow-hidden opacity-0">
         <div
           ref={horizontalRef}
-           className="horizantal-section flex  md:w-[400%] w-[420%] ">
+          className="horizantal-section flex  md:w-[400%] w-[420%] ">
           {projectsImages.map((project) => (
             <div key={project.id} className="panel relative flex items-center justify-center  ">
 
