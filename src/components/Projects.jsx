@@ -14,31 +14,39 @@ const Projects = () => {
 
   // Projects Images Data 
 
-  const projectsImages = [
+  const projectsData = [
     {
       id: 1,
       title: "AI Powered Image Enhancer",
       imageSrc: "/Images/Image-enhancer.png",
+      link: "https://your-ai-image-enhancer-link.com",
 
     },
     {
       id: 2,
       title: "Prayer Times App ",
       imageSrc: "/Images/Prayer-times.png",
+      link: "https://your-prayer-times-app-link.com",
 
     }, {
       id: 3,
       title: "CodeFlow AI",
       imageSrc: "/Images/CodeFlow.png",
+      link: "https://your-codeflow-ai-link.com",
 
     }, {
       id: 4,
       title: "Real Estate Agency Web",
       imageSrc: "/Images/Megma.png",
+      link: "https://your-real-estate-web-link.com",
 
     }
   ]
 
+  const projectImages = (link) => {
+    if (!link) return;
+    window.open(link, "_blank", "noopener,noreferrer");
+  };
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -136,27 +144,27 @@ const Projects = () => {
     )
     //  Horizontal Scrolling 
     const horizontalScroll = gsap.to(".panel", {
-      xPercent: -100 * (projectsImages.length - 1),
+      xPercent: -100 * (projectsData.length - 1),
       ease: "none",
       scrollTrigger: {
         trigger: triggerRef.current,
         start: "top top",
         end: () => `+=${horizontalRef.current.offsetWidth}`,
-        pin : true ,
-        scrub: 1, 
-        snap:{
-          snapTo: 1 / (projectsImages.length -1 ),
-          duration: {main : 0.2 , max: 0.3 },
+        pin: true,
+        scrub: 1,
+        snap: {
+          snapTo: 1 / (projectsData.length - 1),
+          duration: { main: 0.2, max: 0.3 },
           delay: 0.1
-        } , 
+        },
         invalidateOnRefresh: true,
 
       }
 
     })
     //  Image Animations 
-    const panels =  gsap.utils.toArray (".panel")
-    panels.forEach((panel, i ) => {
+    const panels = gsap.utils.toArray(".panel")
+    panels.forEach((panel, i) => {
       const image = panel.querySelector(".project-image")
       const imageTitle = panel.querySelector(".project-title")
 
@@ -164,24 +172,24 @@ const Projects = () => {
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: panel , 
-          containerAnimation: horizontalScroll, 
+          trigger: panel,
+          containerAnimation: horizontalScroll,
           start: "left right",
-          end : "right left ",
-          scrub : true ,
+          end: "right left ",
+          scrub: true,
 
         }
       })
       // Image Scale And Opacity 
-    tl.fromTo(image, {scale : 0, rotate: -20, }, {scale : 1, rotate: 1, duration: 0.5, })
+      tl.fromTo(image, { scale: 0, rotate: -20, }, { scale: 1, rotate: 1, duration: 0.5, })
       // Title Animation 
-      if(imageTitle){
-        tl.fromTo(imageTitle, {y: 30, }, {y: -100, duration:0.3 }, 0.2)
+      if (imageTitle) {
+        tl.fromTo(imageTitle, { y: 30, }, { y: -100, duration: 0.3 }, 0.2)
       }
 
     })
 
-  }, [projectsImages.length])
+  }, [projectsData.length])
 
 
 
@@ -206,14 +214,19 @@ const Projects = () => {
         <div
           ref={horizontalRef}
           className="horizantal-section flex  md:w-[400%] w-[420%] ">
-          {projectsImages.map((project) => (
+          {projectsData.map((project) => (
             <div key={project.id} className="panel relative flex items-center justify-center  ">
 
               <div className="relative w-full h-full flex flex-col items-center justify-center p-4 sm:p-8 md:p-12 ">
                 <img
                   className="project-image max-w-full max-h-full rounded-2xl object-cover "
                   src={project.imageSrc} alt="Project-Image" />
-                <h2 className="project-title flex items-center  gap-3 md:text-3xl text-sm md:font-bold text-black mt-6 z-50 text-nowrap hover:text-gray-400 transition-colors duration-300 cursor-pointer  ">{project.title} <CiShare1 /></h2>
+                <h2
+                  className="project-title flex items-center  gap-3 md:text-3xl text-sm md:font-bold text-black mt-6 z-50 text-nowrap hover:text-gray-400 transition-colors duration-300 cursor-pointer  "
+                  onClick={() => projectImages(project.link)}
+                >
+                  {project.title} <CiShare1 />
+                </h2>
               </div>
             </div>
           )
