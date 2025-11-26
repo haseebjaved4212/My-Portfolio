@@ -3,10 +3,13 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CiShare1 } from "react-icons/ci";
 
+
 const Projects = () => {
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const titleLineRef = useRef(null);
+  const horizontalRef = useRef(null);
+  const triggerRef = useRef(null);
 
   // Projects Images Data 
 
@@ -62,7 +65,7 @@ const Projects = () => {
     }
 
     )
-    //  Titlw Line Animation 
+    //  Title Line Animation 
 
     gsap.fromTo(
       titleLineRef.current,
@@ -86,6 +89,29 @@ const Projects = () => {
     }
 
     )
+    // Section Entrance Animation 
+    gsap.fromTo(
+      triggerRef.current,
+      {
+        y: 100,
+        rotationX: 20,
+        opacity: 0,
+      }, {
+      y: 0,
+      rotationX: 0,
+      duration: 1,
+      ease: "power2.out",
+      delay: 0.2,
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 70%",
+        toggleActions: "play none none reverse",
+
+
+      }
+    }
+    )
+
 
   })
 
@@ -94,7 +120,7 @@ const Projects = () => {
   return (
     <section
       ref={sectionRef}
-      id="horizontal-section"
+      id="horizantol-section"
       className="relative py-20 bg-[#f6f6f6]
      overflow-hidden "
     >
@@ -108,17 +134,18 @@ const Projects = () => {
 
       {/* Horizontal Scroll Area   section */}
 
-      <div className="overflow-hidden ">
-        <div 
-        id="" className=" flex  md:w-[400%] w-[420%] not-visited:">
+      <div ref={triggerRef} className="overflow-hidden opacity-0">
+        <div
+          ref={horizontalRef}
+           className="horizantal-section flex  md:w-[400%] w-[420%] ">
           {projectsImages.map((project) => (
-            <div  key={project.id} className="panel relative flex items-center justify-center  ">
+            <div key={project.id} className="panel relative flex items-center justify-center  ">
 
               <div className="relative w-full h-full flex flex-col items-center justify-center p-4 sm:p-8 md:p-12 ">
                 <img
-                className="project-image max-w-full max-h-full rounded-2xl object-cover "
-                src={project.imageSrc} alt="Project-Image" />
-                <h2 className="project-title flex items-center  gap-3 md:text-3xl text-sm md:font-bold text-black mt-6 z-50 text-nowrap hover:text-gray-400 transition-colors duration-300  ">{project.title} <CiShare1 /></h2>
+                  className="project-image max-w-full max-h-full rounded-2xl object-cover "
+                  src={project.imageSrc} alt="Project-Image" />
+                <h2 className="project-title flex items-center  gap-3 md:text-3xl text-sm md:font-bold text-black mt-6 z-50 text-nowrap hover:text-gray-400 transition-colors duration-300 cursor-pointer  ">{project.title} <CiShare1 /></h2>
               </div>
             </div>
           )
