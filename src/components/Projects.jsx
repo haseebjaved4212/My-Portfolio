@@ -109,7 +109,8 @@ const Projects = () => {
       {/* Horizontal Scroll Area   section */}
 
       <div className="overflow-hidden ">
-        <div className="horizontal-section flex  md:w-[400%] w-[420%] not-visited:">
+        <div 
+        id="" className=" flex  md:w-[400%] w-[420%] not-visited:">
           {projectsImages.map((project) => (
             <div  key={project.id} className="panel relative flex items-center justify-center  ">
 
