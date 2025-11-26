@@ -2,6 +2,7 @@ import { useRef, useEffect } from "react"
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CiShare1 } from "react-icons/ci";
+import { TbLadle, TbLamp } from "react-icons/tb";
 
 
 const Projects = () => {
@@ -134,7 +135,7 @@ const Projects = () => {
     }
     )
     //  Horizontal Scrolling 
-    const horizontalScroll = gsap.to("panel", {
+    const horizontalScroll = gsap.to(".panel", {
       xPercent: -100 * (projectsImages.length - 1),
       ease: "none",
       scrollTrigger: {
@@ -168,13 +169,19 @@ const Projects = () => {
           start: "left right",
           end : "right left ",
           scrub : true ,
-          
+
         }
       })
+      // Image Scale And Opacity 
+    tl.fromTo(image, {scale : 0, rotate: -20, }, {scale : 1, rotate: 1, duration: 0.5, })
+      // Title Animation 
+      if(imageTitle){
+        tl.fromTo(imageTitle, {y: 30, }, {y: -100, duration:0.3 }, 0.2)
+      }
 
     })
 
-  }, [])
+  }, [projectsImages.length])
 
 
 
