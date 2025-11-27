@@ -195,6 +195,7 @@ const Projects = () => {
 
   return (
     <section
+    
       ref={sectionRef}
       id="horizantol-section"
       className="relative py-20 bg-[#f6f6f6]

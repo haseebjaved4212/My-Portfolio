@@ -22,7 +22,7 @@ const Footer = () => {
               </h3>
               <ul className="space-y-2 text-violet-100/80">
                 <li><a href="#about" className="hover:text-white transition-colors">About</a></li>
-                <li><a href="#projects" className="hover:text-white transition-colors">Projects</a></li>
+                <li><a href="#horizantol-section" className="hover:text-white transition-colors">Projects</a></li>
                 <li><a href="#skills" className="hover:text-white transition-colors">Skills</a></li>
                 <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>
               </ul>

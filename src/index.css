@@ -3,6 +3,7 @@
 
 html {
   scroll-behavior: smooth;
+  top: 10%;
   cursor: none; /* Hide default cursor */
 } 
 

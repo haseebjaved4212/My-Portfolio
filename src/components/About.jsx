@@ -87,6 +87,7 @@ const About = () => {
   };
   return (
     <section
+    id="about"
       ref={sectionRef}
       className="h-screen relative bg-linear-to-b from-black to-[#9a74cf50]"
     >

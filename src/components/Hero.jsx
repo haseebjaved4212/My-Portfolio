@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const Hero = () => {
   return (
-    <section className="h-screen bg-linear-to-b from-violet-900 to black flex xl:flex-row flex-col-reverse items-center justify-between lg:px-20 px-10 relative overflow-hidden" >
+    <section id='home' className="h-screen bg-linear-to-b from-violet-900 to black flex xl:flex-row flex-col-reverse items-center justify-between lg:px-20 px-10 relative overflow-hidden" >
       {/* Left Side*/}
       <div className="z-40 xl:mb-0 mb-[20%]">
         <motion.h1
