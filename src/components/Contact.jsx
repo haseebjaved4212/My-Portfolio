@@ -112,7 +112,9 @@ const Contact = () => {
 
 
   return (
-    <section ref={sectionRef}
+    <section 
+    id="contact"
+    ref={sectionRef}
       className="flex items-center justify-center bg-black relative " style={{ overscrollBehavior: "none" }}>
 
       {/* Simple Circle With Minimal nesting */}
