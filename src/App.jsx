@@ -8,6 +8,7 @@ import CustomCursor from './components/CustomCursor.jsx'
 import About from './components/About.jsx'
 import Projects from './components/Projects.jsx'
 import Contact from './components/Contact.jsx'
+import Footer from './components/Footer.jsx'
 
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
       <About />
       <Projects />
       <Contact />
+      <Footer />
     </>
   )
 }
