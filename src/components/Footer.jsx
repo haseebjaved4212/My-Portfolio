@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaTwitter, FaFacebook, FaInstagram, FaReddit, FaEnvelope } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -15,48 +15,86 @@ const Footer = () => {
 
           {/* Links + Socials */}
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 text-xs sm:text-sm">
-            {/* Navigation */}
-            <div className="text-center sm:text-left">
-              <h3 className="text-[0.65rem] font-semibold tracking-widest text-violet-100/80 uppercase mb-2">
-                Navigation
-              </h3>
-              <ul className="space-y-2 text-violet-100/80">
-                <li><a href="#about" className="hover:text-white transition-colors">About</a></li>
-                <li><a href="#horizantol-section" className="hover:text-white transition-colors">Projects</a></li>
-                <li><a href="#skills" className="hover:text-white transition-colors">Skills</a></li>
-                <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>
-              </ul>
-            </div>
-
             {/* Social */}
             <div className="text-center sm:text-left">
               <h3 className="text-[0.65rem] font-semibold tracking-widest text-violet-100/80 uppercase mb-2">
                 Connect
               </h3>
-              <div className="flex items-center justify-center sm:justify-start gap-3 mt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2 text-violet-100/80">
                 <a
                   href="https://github.com/haseebjaved4212"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+                  className="flex items-center gap-2 hover:text-white transition-colors"
                 >
-                  <FaGithub className="text-lg" />
+                  <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                    <FaGithub className="text-base" />
+                  </span>
+                  <span>GitHub</span>
                 </a>
                 <a
                   href="https://www.linkedin.com/in/haseeb-javed-0332b3341"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+                  className="flex items-center gap-2 hover:text-white transition-colors"
                 >
-                  <FaLinkedin className="text-lg" />
+                  <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                    <FaLinkedin className="text-base" />
+                  </span>
+                  <span>LinkedIn</span>
+                </a>
+                <a
+                  href="https://www.facebook.com/share/1BU3pcCN8W/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 hover:text-white transition-colors"
+                >
+                  <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                    <FaFacebook className="text-base" />
+                  </span>
+                  <span>Facebook</span>
+                </a>
+                <a
+                  href="https://www.instagram.com/haseeb_javed4212?igsh=MTV0cWI2aHh2dDRmbw=="
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 hover:text-white transition-colors"
+                >
+                  <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                    <FaInstagram className="text-base" />
+                  </span>
+                  <span>Instagram</span>
                 </a>
                 <a
                   href="https://x.com/Haseebjaved4212?t=Be1nJmdR3ipCsHK3dylBTA&s=09"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+                  className="flex items-center gap-2 hover:text-white transition-colors"
                 >
-                  <FaTwitter className="text-lg" />
+                  <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                    <FaTwitter className="text-base" />
+                  </span>
+                  <span>Twitter (X)</span>
+                </a>
+                <a
+                  href="mailto:contactimhaseeb@gmail.com"
+                  className="flex items-center gap-2 hover:text-white transition-colors"
+                >
+                  <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                    <FaEnvelope className="text-base" />
+                  </span>
+                  <span>Email</span>
+                </a>
+                <a
+                  href="https://www.reddit.com/u/Haseeb4212/s/DqFxYkvD1V"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 hover:text-white transition-colors"
+                >
+                  <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                    <FaReddit className="text-base" />
+                  </span>
+                  <span>Reddit</span>
                 </a>
               </div>
             </div>
