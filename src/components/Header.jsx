@@ -23,6 +23,19 @@ const Header = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success' or 'error'
 
+  // Handle smooth scroll to section
+  const handleNavClick = (e, sectionId) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    // Close mobile menu if open
+    if (isOpen) {
+      setIsOpen(false);
+    }
+  };
+
   // Handle Form Submission using Web3Forms (Easier than EmailJS)
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -123,9 +136,14 @@ const Header = () => {
         {/* Desktop Navigation */}
 
         <nav className="lg:flex hidden space-x-8">
-          {["Home", "About", "Projects", "Contact"].map((item, index) => (
+          {[
+            { name: "Home", id: "home" },
+            { name: "About", id: "about" },
+            { name: "Projects", id: "projects" },
+            { name: "Contact", id: "contact" },
+          ].map((item, index) => (
             <motion.a
-              key={item}
+              key={item.name}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
@@ -135,10 +153,11 @@ const Header = () => {
                 delay: 0.7 + index * 0.2,
                 duration: 1.2,
               }}
-              className="relative text-gray-800 dark:text-gray-200 hover:text-violet-600 dark:hover:text-violet-400 font-medium transition-colors duration-300 group"
-              href="#"
+              onClick={(e) => handleNavClick(e, item.id)}
+              className="relative text-gray-800 dark:text-gray-200 hover:text-violet-600 dark:hover:text-violet-400 font-medium transition-colors duration-300 group cursor-pointer"
+              href={`#${item.id}`}
             >
-              {item}
+              {item.name}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-violet-600 group-hover:w-full transition-all duration-300"></span>
             </motion.a>
           ))}
@@ -154,8 +173,11 @@ const Header = () => {
               delay: 1.4,
               duration: 0.8,
             }}
-            href="#"
+            href="https://github.com/haseebjaved4212"
+            target="_blank"
+            rel="noopener noreferrer"
             className=" text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300"
+            aria-label="GitHub Profile"
           >
             <FiGithub className="w-5 h-5" />
           </motion.a>
@@ -166,8 +188,11 @@ const Header = () => {
               delay: 1.4,
               duration: 0.8,
             }}
-            href="#"
+            href="https://twitter.com/your_twitter_handle"
+            target="_blank"
+            rel="noopener noreferrer"
             className=" text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300"
+            aria-label="Twitter Profile"
           >
             <FiTwitter className="w-5 h-5" />
           </motion.a>
@@ -178,8 +203,11 @@ const Header = () => {
               delay: 1.4,
               duration: 0.8,
             }}
-            href="#"
+            href="https://www.linkedin.com/in/your-linkedin-profile"
+            target="_blank"
+            rel="noopener noreferrer"
             className=" text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300"
+            aria-label="LinkedIn Profile"
           >
             <FiLinkedin className="w-5 h-5" />
           </motion.a>
@@ -228,14 +256,22 @@ const Header = () => {
         className="md:hidden overflow-hidden bg-white dark:bg-gray-900 shadow-lg px-4 py-5 space-y-5"
       >
         <nav className="flex flex-col space-y-3">
-          {["Home", "About", "Projects", "Contact"].map((item) => (
+          {[
+            { name: "Home", id: "home" },
+            { name: "About", id: "about" },
+            { name: "Projects", id: "projects" },
+            { name: "Contact", id: "contact" },
+          ].map((item) => (
             <motion.a
-              onClick={toggleMenu}
-              key={item}
-              className="relative text-gray-800 dark:text-gray-200 hover:text-violet-600 dark:hover:text-violet-400 font-medium transition-colors duration-300 group"
-              href="#"
+              onClick={(e) => {
+                handleNavClick(e, item.id);
+                toggleMenu();
+              }}
+              key={item.name}
+              className="relative text-gray-800 dark:text-gray-200 hover:text-violet-600 dark:hover:text-violet-400 font-medium transition-colors duration-300 group cursor-pointer"
+              href={`#${item.id}`}
             >
-              {item}
+              {item.name}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-violet-600 group-hover:w-full transition-all duration-300"></span>
             </motion.a>
           ))}
@@ -243,13 +279,28 @@ const Header = () => {
         {/* Social Icons -Mobile */}
         <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
           <div className="flex space-x-5">
-            <a href="#">
+            <a
+              href="https://github.com/haseebjaved4212"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub Profile"
+            >
               <FiGithub className="w-5 h-5 text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300" />
             </a>
-            <a href="#">
+            <a
+              href="https://twitter.com/your_twitter_handle"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter Profile"
+            >
               <FiTwitter className="w-5 h-5 text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300" />
             </a>
-            <a href="#">
+            <a
+              href="https://www.linkedin.com/in/your-linkedin-profile"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn Profile"
+            >
               <FiLinkedin className="w-5 h-5 text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300" />
             </a>
           </div>
