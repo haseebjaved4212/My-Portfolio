@@ -285,7 +285,11 @@ const Header = () => {
               rel="noopener noreferrer"
               aria-label="GitHub Profile"
             >
-              <FiGithub target="_blank" rel="noopener noreferrer" className="w-5 h-5 text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300" />
+              <FiGithub
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-5 h-5 text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300"
+              />
             </a>
             <a
               href="https://x.com/Haseebjaved4212?t=Be1nJmdR3ipCsHK3dylBTA&s=09"
@@ -293,7 +297,11 @@ const Header = () => {
               rel="noopener noreferrer"
               aria-label="Twitter Profile"
             >
-              <FiTwitter target="_blank" rel="noopener noreferrer" className="w-5 h-5 text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300" />
+              <FiTwitter
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-5 h-5 text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300"
+              />
             </a>
             <a
               href="https://www.linkedin.com/in/haseeb-javed-0332b3341"
@@ -301,7 +309,11 @@ const Header = () => {
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile"
             >
-              <FiLinkedin target="_blank" rel="noopener noreferrer" className="w-5 h-5 text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300" />
+              <FiLinkedin
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-5 h-5 text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300"
+              />
             </a>
           </div>
           <button
