@@ -288,7 +288,7 @@ const Header = () => {
               <FiGithub className="w-5 h-5 text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300" />
             </a>
             <a
-              href="https://twitter.com/your_twitter_handle"
+              href="https://x.com/Haseebjaved4212?t=Be1nJmdR3ipCsHK3dylBTA&s=09"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Twitter Profile"
@@ -296,8 +296,7 @@ const Header = () => {
               <FiTwitter className="w-5 h-5 text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300" />
             </a>
             <a
-              href="https://www.linkedin.com/in/your-linkedin-profile"
-              target="_blank"
+              href="https://www.linkedin.com/in/haseeb-javed-0332b3341"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile"
             >
