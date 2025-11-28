@@ -31,21 +31,23 @@ const Header = () => {
 
     // Web3Forms - Super Easy Setup!
     // Get access key from: https://web3forms.com (just enter your email)
-    const accessKey =
-      import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY";
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 
     // If not configured, show helpful message
-    if (!accessKey || accessKey === "YOUR_ACCESS_KEY") {
+    if (
+      !accessKey ||
+      accessKey.trim() === "" ||
+      accessKey === "YOUR_ACCESS_KEY"
+    ) {
       setSubmitStatus("error");
       setIsSubmitting(false);
       alert(
         "Web3Forms is not configured yet.\n\n" +
-          "Quick Setup (2 minutes):\n" +
-          "1. Go to https://web3forms.com\n" +
-          "2. Enter your email: contactihaseeb@gmail.com\n" +
-          "3. Copy the Access Key\n" +
-          "4. Add to .env file: VITE_WEB3FORMS_ACCESS_KEY=your_key_here\n" +
-          "5. Restart server"
+          "Quick Setup:\n" +
+          "1. Create .env.local file in project root\n" +
+          "2. Add: VITE_WEB3FORMS_ACCESS_KEY=your_actual_key_here\n" +
+          "3. Make sure no spaces after = sign\n" +
+          "4. Restart server (npm run dev)"
       );
       return;
     }
