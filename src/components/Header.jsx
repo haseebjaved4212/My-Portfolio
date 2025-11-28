@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { FiGithub, FiLinkedin, FiTwitter, FiMenu, FiX } from "react-icons/fi";
+import { useContactForm } from "../context/ContactFormContext";
+import emailjs from "@emailjs/browser";
 
 const Header = () => {
   // Toggle The Menu Open/Close
@@ -8,17 +10,81 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  //  State to Track If the contact form is open
+  //  Use Contact Form Context
+  const {
+    isOpen: ContactFormOpen,
+    openForm: openContactForm,
+    closeForm: closeContactForm,
+  } = useContactForm();
 
-  const [ContactFormOpen, setContactFormOpen] = useState(false);
+  // Contact Form State
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success' or 'error'
 
-  const openContactForm = () => setContactFormOpen(true);
-  const closeContactForm = () => setContactFormOpen(false);
+  // Handle Form Submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
 
-  // Contact ForM
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [message, setMessage] = useState("");
+    // EmailJS configuration
+    // Get credentials from environment variables
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    // Check if EmailJS is configured
+    if (
+      !serviceId ||
+      !templateId ||
+      !publicKey ||
+      serviceId === "YOUR_SERVICE_ID" ||
+      templateId === "YOUR_TEMPLATE_ID" ||
+      publicKey === "YOUR_PUBLIC_KEY"
+    ) {
+      setSubmitStatus("error");
+      setIsSubmitting(false);
+      console.error(
+        "EmailJS Error: Please configure EmailJS credentials in .env file"
+      );
+      alert(
+        "EmailJS is not configured yet. Please set up your EmailJS credentials. Check EMAILJS_SETUP.md for instructions."
+      );
+      return;
+    }
+
+    const templateParams = {
+      from_name: name,
+      from_email: email,
+      message: message,
+      to_email: "contactihaseeb@gmail.com",
+    };
+
+    try {
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      setSubmitStatus("success");
+      setName("");
+      setEmail("");
+      setMessage("");
+      // Close form after 2 seconds
+      setTimeout(() => {
+        closeContactForm();
+        setSubmitStatus(null);
+      }, 2000);
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      setSubmitStatus("error");
+      // Show more detailed error message
+      if (error.text) {
+        console.error("Error details:", error.text);
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <header className="App-header absolute w-full z-50 transition-all duration-300">
@@ -223,7 +289,17 @@ const Header = () => {
                   <FiX className="w-5 h-5" />
                 </button>
               </div>
-              <form action="">
+              <form onSubmit={handleSubmit}>
+                {submitStatus === "success" && (
+                  <div className="mb-4 p-3 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded-lg">
+                    Message sent successfully! ✓
+                  </div>
+                )}
+                {submitStatus === "error" && (
+                  <div className="mb-4 p-3 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 rounded-lg">
+                    Failed to send message. Please try again.
+                  </div>
+                )}
                 <div className="mb-4">
                   <label
                     htmlFor="name"
@@ -235,6 +311,9 @@ const Header = () => {
                     type="text"
                     id="name"
                     name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600 focus:border-violet-600"
                     placeholder="Enter your name"
                   />
@@ -250,6 +329,9 @@ const Header = () => {
                     type="email"
                     id="email"
                     name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600 focus:border-violet-600"
                     placeholder="Enter your email"
                   />
@@ -265,6 +347,9 @@ const Header = () => {
                     id="message"
                     name="message"
                     rows="4"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    required
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600 focus:border-violet-600"
                     placeholder="Enter your message"
                   ></textarea>
@@ -273,9 +358,10 @@ const Header = () => {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full px-4 py-2 bg-violet-600 text-white font-medium rounded-lg hover:bg-gray-100  hover:text-violet-700 transition-colors duration-300"
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-2 bg-violet-600 text-white font-medium rounded-lg hover:bg-violet-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300"
                 >
-                  Send Message
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </motion.button>
               </form>
             </motion.div>

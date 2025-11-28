@@ -1,6 +1,7 @@
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useContactForm } from "../context/ContactFormContext";
 
 // import { CiShare1 } from "react-icons/ci";
 
@@ -8,6 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 
 const Contact = () => {
+  const { openForm } = useContactForm();
   // Main Refs 
   const circleRef = useRef(null);
   const sectionRef = useRef(null);
@@ -135,7 +137,12 @@ const Contact = () => {
           <p className="text-black lg:w-[40rem] w-[20rem] absolute am:mt-3 mt-1 md:scale-[0.1] scale-[0.068]">
             Front-end developer specialized in crafting modern, resposive web interfaces using React, Tailwind CSS, and advanced UI animations techniques. Focused on clean code, and pixel-perfect design that stand out in this AI era.
           </p>
-          <button className="px-10 py-2 rounded-xl bg-violet-600 text-white transition-all duration-500 scale-[0.1] absolute sm:mt9 mt-7 text-nowrap">Contact Me</button>
+          <button 
+            onClick={openForm}
+            className="px-10 py-2 rounded-xl bg-violet-600 text-white transition-all duration-500 scale-[0.1] absolute sm:mt9 mt-7 text-nowrap hover:bg-violet-700 cursor-pointer"
+          >
+            Contact Me
+          </button>
         </div>
       </div>
 
