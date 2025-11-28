@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { FiGithub, FiLinkedin, FiTwitter, FiMenu, FiX } from "react-icons/fi";
 import { useContactForm } from "../context/ContactFormContext";
-import emailjs from "@emailjs/browser";
 
 const Header = () => {
   // Toggle The Menu Open/Close
@@ -24,63 +23,71 @@ const Header = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success' or 'error'
 
-  // Handle Form Submission
+  // Handle Form Submission using Web3Forms (Easier than EmailJS)
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    // EmailJS configuration
-    // Get credentials from environment variables
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    // Web3Forms - Super Easy Setup!
+    // Get access key from: https://web3forms.com (just enter your email)
+    const accessKey =
+      import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY";
 
-    // Check if EmailJS is configured
-    if (
-      !serviceId ||
-      !templateId ||
-      !publicKey ||
-      serviceId === "YOUR_SERVICE_ID" ||
-      templateId === "YOUR_TEMPLATE_ID" ||
-      publicKey === "YOUR_PUBLIC_KEY"
-    ) {
+    // If not configured, show helpful message
+    if (!accessKey || accessKey === "YOUR_ACCESS_KEY") {
       setSubmitStatus("error");
       setIsSubmitting(false);
-      console.error(
-        "EmailJS Error: Please configure EmailJS credentials in .env file"
-      );
       alert(
-        "EmailJS is not configured yet. Please set up your EmailJS credentials. Check EMAILJS_SETUP.md for instructions."
+        "Web3Forms is not configured yet.\n\n" +
+          "Quick Setup (2 minutes):\n" +
+          "1. Go to https://web3forms.com\n" +
+          "2. Enter your email: contactihaseeb@gmail.com\n" +
+          "3. Copy the Access Key\n" +
+          "4. Add to .env file: VITE_WEB3FORMS_ACCESS_KEY=your_key_here\n" +
+          "5. Restart server"
       );
       return;
     }
 
-    const templateParams = {
-      from_name: name,
-      from_email: email,
+    const formData = {
+      access_key: accessKey,
+      name: name,
+      email: email,
       message: message,
+      subject: `New Contact Form Message from ${name}`,
+      from_name: name,
       to_email: "contactihaseeb@gmail.com",
     };
 
     try {
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
-      setSubmitStatus("success");
-      setName("");
-      setEmail("");
-      setMessage("");
-      // Close form after 2 seconds
-      setTimeout(() => {
-        closeContactForm();
-        setSubmitStatus(null);
-      }, 2000);
-    } catch (error) {
-      console.error("EmailJS Error:", error);
-      setSubmitStatus("error");
-      // Show more detailed error message
-      if (error.text) {
-        console.error("Error details:", error.text);
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitStatus("success");
+        setName("");
+        setEmail("");
+        setMessage("");
+        // Close form after 2 seconds
+        setTimeout(() => {
+          closeContactForm();
+          setSubmitStatus(null);
+        }, 2000);
+      } else {
+        throw new Error(result.message || "Failed to send message");
       }
+    } catch (error) {
+      console.error("Web3Forms Error:", error);
+      setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }
