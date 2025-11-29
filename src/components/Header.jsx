@@ -265,10 +265,9 @@ const Header = () => {
             { name: "Contact", id: "contact" },
           ].map((item) => (
             <motion.a
-              onClick={() => {
-                // Let the browser handle the anchor scroll via href,
-                // just close the mobile menu from React state.
-                setIsOpen(false);
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick(item.id);
               }}
               key={item.name}
               className="relative text-gray-800 dark:text-gray-200 hover:text-violet-600 dark:hover:text-violet-400 font-medium transition-colors duration-300 group cursor-pointer"
