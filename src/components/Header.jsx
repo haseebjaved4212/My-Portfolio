@@ -25,18 +25,17 @@ const Header = () => {
 
   // Handle smooth scroll to section
   const handleNavClick = (sectionId) => {
-    // Close mobile menu first
-    if (isOpen) {
-      setIsOpen(false);
-    }
+    // Close mobile menu
+    setIsOpen(false);
 
-    // Small delay to ensure menu closes, then scroll
-    setTimeout(() => {
-      const element = document.getElementById(sectionId);
-      if (element) {
+    // Scroll to section
+    const element = document.getElementById(sectionId);
+    if (element) {
+      // Use requestAnimationFrame to ensure DOM is ready
+      requestAnimationFrame(() => {
         element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }, 100);
+      });
+    }
   };
 
   // Handle Form Submission using Web3Forms (Easier than EmailJS)
@@ -272,19 +271,17 @@ const Header = () => {
                 { name: "Projects", id: "projects" },
                 { name: "Contact", id: "contact" },
               ].map((item) => (
-                <motion.a
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
+                <button
+                  type="button"
+                  onClick={() => {
                     handleNavClick(item.id);
                   }}
                   key={item.name}
-                  className="relative text-gray-800 dark:text-gray-200 hover:text-violet-600 dark:hover:text-violet-400 font-medium transition-colors duration-300 group cursor-pointer py-2"
-                  href={`#${item.id}`}
+                  className="relative text-left text-gray-800 dark:text-gray-200 hover:text-violet-600 dark:hover:text-violet-400 font-medium transition-colors duration-300 group cursor-pointer py-2 w-full"
                 >
                   {item.name}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-violet-600 group-hover:w-full transition-all duration-300"></span>
-                </motion.a>
+                </button>
               ))}
             </nav>
             {/* Social Icons -Mobile */}
