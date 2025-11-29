@@ -15,7 +15,7 @@ const Projects = () => {
   const projectsData = [
     {
       id: 1,
-      title: "AI Powered Image Enhancer",
+      title: "AI  Image Enhancer",
       imageSrc: "/Images/Image-enhancer.png",
       link: "https://haseebjaved4212.github.io/AI-Powered-Image-Enhancer/",
     },
