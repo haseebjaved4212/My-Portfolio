@@ -256,6 +256,7 @@ const Header = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            key="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -263,7 +264,6 @@ const Header = () => {
               duration: 0.3,
             }}
             className="md:hidden overflow-hidden bg-white dark:bg-gray-900 shadow-lg px-4 py-5 space-y-5"
-            style={{ pointerEvents: isOpen ? "auto" : "none" }}
           >
             <nav className="flex flex-col space-y-3">
               {[
