@@ -130,52 +130,71 @@ const Projects = () => {
         },
       }
     );
-    //  Horizontal Scrolling
-    const horizontalScroll = gsap.to(".panel", {
-      xPercent: -100 * (projectsData.length - 1),
-      ease: "none",
-      scrollTrigger: {
-        trigger: triggerRef.current,
-        start: "top top",
-        end: () => `+=${horizontalRef.current.offsetWidth}`,
-        pin: true,
-        scrub: 1,
-        snap: {
-          snapTo: 1 / (projectsData.length - 1),
-          duration: { main: 0.2, max: 0.3 },
-          delay: 0.1,
-        },
-        invalidateOnRefresh: true,
-      },
-    });
-    //  Image Animations
-    const panels = gsap.utils.toArray(".panel");
-    panels.forEach((panel, i) => {
-      const image = panel.querySelector(".project-image");
-      const imageTitle = panel.querySelector(".project-title");
 
-      //  Create a TimeLine For Each Panel
-
-      const tl = gsap.timeline({
+    //  Horizontal Scrolling + panel animations (DESKTOP ONLY)
+    //  Simple check: only apply GSAP horizontal effect when viewport >= 768px.
+    if (window.innerWidth >= 768) {
+      //  Horizontal Scrolling
+      const horizontalScroll = gsap.to(".panel", {
+        xPercent: -100 * (projectsData.length - 1),
+        ease: "none",
         scrollTrigger: {
-          trigger: panel,
-          containerAnimation: horizontalScroll,
-          start: "left right",
-          end: "right left ",
-          scrub: true,
+          trigger: triggerRef.current,
+          start: "top top",
+          end: () => `+=${horizontalRef.current.offsetWidth}`,
+          pin: true,
+          scrub: 1,
+          snap: {
+            snapTo: 1 / (projectsData.length - 1),
+            duration: { main: 0.2, max: 0.3 },
+            delay: 0.1,
+          },
+          invalidateOnRefresh: true,
         },
       });
-      // Image Scale And Opacity
-      tl.fromTo(
-        image,
-        { scale: 0, rotate: -20 },
-        { scale: 1, rotate: 1, duration: 0.5 }
-      );
-      // Title Animation
-      if (imageTitle) {
-        tl.fromTo(imageTitle, { y: 30 }, { y: -100, duration: 0.3 }, 0.2);
-      }
-    });
+
+      //  Image Animations
+      const panels = gsap.utils.toArray(".panel");
+      panels.forEach((panel) => {
+        const image = panel.querySelector(".project-image");
+        const imageTitle = panel.querySelector(".project-title");
+
+        //  Create a TimeLine For Each Panel
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: panel,
+            containerAnimation: horizontalScroll,
+            start: "left right",
+            end: "right left ",
+            scrub: true,
+          },
+        });
+        // Image Scale And Opacity
+        tl.fromTo(
+          image,
+          { scale: 0, rotate: -20 },
+          { scale: 1, rotate: 1, duration: 0.5 }
+        );
+        // Title Animation
+        if (imageTitle) {
+          tl.fromTo(imageTitle, { y: 30 }, { y: -100, duration: 0.3 }, 0.2);
+        }
+      });
+    }
+
+    // Cleanup: kill only ScrollTriggers created for this section
+    return () => {
+      ScrollTrigger.getAll().forEach((st) => {
+        if (st.vars && st.vars.trigger) {
+          if (
+            st.vars.trigger === sectionRef.current ||
+            st.vars.trigger === triggerRef.current
+          ) {
+            st.kill();
+          }
+        }
+      });
+    };
   }, [projectsData.length]);
 
   return (
@@ -204,7 +223,7 @@ const Projects = () => {
       <div ref={triggerRef} className="overflow-hidden opacity-0">
         <div
           ref={horizontalRef}
-          className="horizantal-section flex  md:w-[400%] w-[420%] "
+          className="horizantal-section flex flex-col md:flex-row md:w-[400%] w-full "
         >
           {projectsData.map((project) => (
             <div
