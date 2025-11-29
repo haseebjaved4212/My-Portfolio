@@ -25,14 +25,18 @@ const Header = () => {
 
   // Handle smooth scroll to section
   const handleNavClick = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-    // Close mobile menu if open
+    // Close mobile menu first
     if (isOpen) {
       setIsOpen(false);
     }
+
+    // Small delay to ensure menu closes, then scroll
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
   };
 
   // Handle Form Submission using Web3Forms (Easier than EmailJS)
