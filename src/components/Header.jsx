@@ -24,8 +24,7 @@ const Header = () => {
   const [submitStatus, setSubmitStatus] = useState(null); // 'success' or 'error'
 
   // Handle smooth scroll to section
-  const handleNavClick = (e, sectionId) => {
-    e.preventDefault();
+  const handleNavClick = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -153,7 +152,10 @@ const Header = () => {
                 delay: 0.7 + index * 0.2,
                 duration: 1.2,
               }}
-              onClick={(e) => handleNavClick(e, item.id)}
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick(item.id);
+              }}
               className="relative text-gray-800 dark:text-gray-200 hover:text-violet-600 dark:hover:text-violet-400 font-medium transition-colors duration-300 group cursor-pointer"
               href={`#${item.id}`}
             >
@@ -264,8 +266,8 @@ const Header = () => {
           ].map((item) => (
             <motion.a
               onClick={(e) => {
-                handleNavClick(e, item.id);
-                toggleMenu();
+                e.preventDefault();
+                handleNavClick(item.id);
               }}
               key={item.name}
               className="relative text-gray-800 dark:text-gray-200 hover:text-violet-600 dark:hover:text-violet-400 font-medium transition-colors duration-300 group cursor-pointer"
