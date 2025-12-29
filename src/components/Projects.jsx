@@ -23,7 +23,7 @@ const Projects = () => {
       id: 2,
       title: "Prayer Times App ",
       imageSrc: "/Images/Prayer-times.png",
-      link: "https://haseebjaved4212.github.io/Ramadan-Special-Website/",
+      link: "https://haseebjaved4212.github.io/Prayer-Times-App/",
     },
     {
       id: 3,
